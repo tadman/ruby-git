@@ -392,8 +392,9 @@ module Git
       command('config', ['--global', name, value], false)
     end
           
-    def add(path = '.')
-      arr_opts = ['--']
+    def add(path = '.', opts = {})
+      arr_opts = %w[--]
+      arr_opts.unshift('-f') if opts[:force]
       if path.is_a?(Array)
         arr_opts += path
       else
